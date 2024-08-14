@@ -2,19 +2,21 @@
     display: flex;
     flex-direction: column;
     width: 480px;
-    border: 4px solid red;
+    border: 6px solid #dea957;
     gap: 20px;
     border-radius: 36px;
-    background-color: black;
+    background-color: #fafafa;
     padding-left: 32px;
     padding-right: 32px;
 }
 
 .header {
+    color: #525252;
     text-align: left;
 }
 
 .loginsection {
+    color: #525252;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -23,8 +25,11 @@
 
 .emailField {
     border-radius: 4px;
+    background-color: #fafafa;
+    color: #525252;
     height: 32px;
     width: 100%;
+    font-size: 18px;
 }
 
 .pwFieldContainer {
@@ -34,34 +39,49 @@
 
 .pwField {
     border-radius: 4px;
+    background-color: #fafafa;
+    color: #525252;
     height: 32px;
     width: 100%;
+    font-size: 18px;
 }
 
 .eyeBtn {
     display: flex;
     align-items: center;
-    margin-left: -32px;
+    margin-left: -36px;
 }
 
 .forgotPw {
     text-align: right;
 }
 
+.forgotPw:hover {
+    color: #d69e54;
+}
+
 .codeC2aText {
+    color: #525252;
     text-align: left;
 }
 
 .codeField {
     text-align: center;
+    background-color: #fafafa;
+    color: #525252;
     border-radius: 4px;
     height: 32px;
-    width: 300px;
+    width: 160px;
+    font-size: 24px;
 }
 
 .submitBtn {
-    border: 2px solid blue;
-    background-color: grey;
     width: 120px;
-    color: white;
+    background-color: #fafafa;
+    border: 2px solid #525252;
+    color: #525252;
+}
+
+.infoReminder {
+    color: #525252;
 }

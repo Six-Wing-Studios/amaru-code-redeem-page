@@ -8,7 +8,12 @@ import './LoginPage.css';
 
 const LoginPage = () => {
 
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [code, setCode] = useState("");
+  const [codeFieldText, setCodeFieldText] = useState("")
+
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
 
@@ -22,6 +27,36 @@ const LoginPage = () => {
     }
   }
 
+  const forgotPwLink = () => {
+    
+  }
+
+  const onCodeInputChanged = (event) => {
+    let newCode = event.target.value;
+
+    newCode = newCode.replace('-', '');
+    newCode = newCode.toUpperCase();
+
+    if (newCode.length > 8) {
+      newCode = newCode.substring(0, 8);
+    }
+
+    setCode(newCode);
+
+    let newCodeReadout = newCode;
+
+    if (newCode.length > 4) {
+      newCodeReadout = newCode.substring(0, 4) + '-' + newCode.substring(4);
+    }
+
+    setCodeFieldText(newCodeReadout);
+  }
+
+  const handleSubmitBtn = () => {
+    //test code real quick
+    alert(code);
+  }
+
   return (
     <div className='container'>
       <div>
@@ -33,6 +68,8 @@ const LoginPage = () => {
           className='emailField'
           type='email'
           placeholder='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <span className='pwFieldContainer'>
@@ -48,7 +85,9 @@ const LoginPage = () => {
           </span>
         </span>
 
-        <div className='forgotPw'>Forgot Password?</div>
+        {/* <div className='forgotPw' onClick={forgotPwLink} >
+          Forgot Password?
+        </div> */}
       </div>
 
       <div className='codeC2aText'>
@@ -59,14 +98,16 @@ const LoginPage = () => {
         <input 
           className='codeField'
           placeholder='ABCD-1234'
+          value={codeFieldText}
+          onChange={onCodeInputChanged}
         />
       </div>
       
       <div>
-        <button className='submitBtn'>Submit</button>
+        <button className='submitBtn' onClick={handleSubmitBtn}>Submit</button>
       </div>
 
-      <>Having trouble? Please message info@sixwingstudios.com</>
+      <div className='infoReminder'>Having trouble? Please message info@sixwingstudios.com</div>
     </div>
   )
 };
