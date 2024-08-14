@@ -2,9 +2,9 @@ import { React, useState } from 'react';
 
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
-import { eye } from 'react-icons-kit/feather/eye'
+import { eye } from 'react-icons-kit/feather/eye';
 
-import './LoginPage.css'
+import './LoginPage.css';
 
 const LoginPage = () => {
 
@@ -23,20 +23,21 @@ const LoginPage = () => {
   }
 
   return (
-    <div className='loginPage'>
-      <div className='headerContainer'>
+    <div className='container'>
+      <div>
         <h1 className="header">Login</h1>
       </div>
 
       <div className="loginsection">
         <input 
-          className='inField'
+          className='emailField'
           type='email'
           placeholder='Email'
         />
-        <div className='pwFieldContainer'>
+
+        <span className='pwFieldContainer'>
           <input 
-            className='inField'
+            className='pwField'
             type={type}
             placeholder='Password'
             value={password}
@@ -45,23 +46,27 @@ const LoginPage = () => {
           <span className='eyeBtn' onClick={handleToggle}>
             <Icon icon={icon} size={25}/>
           </span>
-        </div>
-        <div>
-          <p>Forgot Password?</p>
-        </div>
+        </span>
+
+        <div className='forgotPw'>Forgot Password?</div>
       </div>
 
-      <p>
+      <div className='codeC2aText'>
         Enter the 8-digit code from your plushie to redeem your bonus content in the Amaru app!
-      </p>
+      </div>
 
       <div>
-        <input />
+        <input 
+          className='codeField'
+          placeholder='ABCD-1234'
+        />
       </div>
       
-      <button className='submitBtn'>Submit</button>
+      <div>
+        <button className='submitBtn'>Submit</button>
+      </div>
 
-      <p>Having trouble? Please message info@sixwingstudios.com</p>
+      <>Having trouble? Please message info@sixwingstudios.com</>
     </div>
   )
 };
