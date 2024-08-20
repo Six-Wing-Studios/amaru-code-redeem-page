@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 import './App.css'
-import LoginPage from './LoginPage'
+import LoginPage from './Screens/LoginPage'
 
 function App() {
   return <LoginPage />

@@ -5,6 +5,7 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 
 import './LoginPage.css';
+import { login, LoginResult } from '../AmaruFirebaseInterface';
 
 const LoginPage = () => {
 
@@ -52,9 +53,18 @@ const LoginPage = () => {
     setCodeFieldText(newCodeReadout);
   }
 
-  const handleSubmitBtn = () => {
-    //test code real quick
-    alert(code);
+  const handleSubmitBtn = async () => {
+    const result = await login(email, password);
+
+    if (result.resultCode === LoginResult.NO_EMAIL) {
+      alert("No Email");
+    } else if (result.resultCode === LoginResult.NO_PASSWORD) {
+      alert("No Password");
+    } else if (result.resultCode === LoginResult.SUCCESS) {
+
+    } else {
+
+    }
   }
 
   return (
