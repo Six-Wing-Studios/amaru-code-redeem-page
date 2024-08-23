@@ -56,15 +56,25 @@ const LoginPage = () => {
   const handleSubmitBtn = async () => {
     const result = await login(email, password);
 
-    if (result.resultCode === LoginResult.NO_EMAIL) {
-      alert("No Email");
-    } else if (result.resultCode === LoginResult.NO_PASSWORD) {
-      alert("No Password");
-    } else if (result.resultCode === LoginResult.SUCCESS) {
+    if (!result.uid) {
+      if (result.resultCode === LoginResult.NO_EMAIL) {
+        alert("No Email");
+      } else if (result.resultCode === LoginResult.NO_PASSWORD) {
+        alert("No Password");
+      } else if (result.resultCode === LoginResult.BAD_EMAIL) {
+        alert("Invalid Email");
+      } else if (result.resultCode === LoginResult.BAD_PASSWORD) {
+        alert("Invalid Password");
+      } else {
+        alert("An unknown error occurred while logging in.");
+      }
 
-    } else {
-
+      return;
     }
+
+    const userUid = result.uid;
+
+    
   }
 
   return (
