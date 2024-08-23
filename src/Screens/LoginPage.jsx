@@ -5,7 +5,7 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 
 import './LoginPage.css';
-import { login, LoginResult } from '../AmaruFirebaseInterface';
+import { login, LoginResult, redeemCode, RedeemResult } from '../AmaruFirebaseInterface';
 
 const LoginPage = () => {
 
@@ -54,16 +54,16 @@ const LoginPage = () => {
   }
 
   const handleSubmitBtn = async () => {
-    const result = await login(email, password);
+    const loginResult = await login(email, password);
 
-    if (!result.uid) {
-      if (result.resultCode === LoginResult.NO_EMAIL) {
+    if (!loginResult.uid) {
+      if (loginResult.resultCode === LoginResult.NO_EMAIL) {
         alert("No Email");
-      } else if (result.resultCode === LoginResult.NO_PASSWORD) {
+      } else if (loginResult.resultCode === LoginResult.NO_PASSWORD) {
         alert("No Password");
-      } else if (result.resultCode === LoginResult.BAD_EMAIL) {
+      } else if (loginResult.resultCode === LoginResult.BAD_EMAIL) {
         alert("Invalid Email");
-      } else if (result.resultCode === LoginResult.BAD_PASSWORD) {
+      } else if (loginResult.resultCode === LoginResult.BAD_PASSWORD) {
         alert("Invalid Password");
       } else {
         alert("An unknown error occurred while logging in.");
@@ -72,9 +72,21 @@ const LoginPage = () => {
       return;
     }
 
-    const userUid = result.uid;
+    const userUid = loginResult.uid;
 
-    
+    const redeemResult = await redeemCode(userUid, code);
+    alert(redeemResult);
+
+    return;
+
+    if (redeemResult !== RedeemResult.SUCCESS) {
+      if (redeemResult === RedeemResult.NO_UID) {
+        //summat queer
+        alert("There's been an unknown error while redeeming the gift code.");
+      } else if (redeemResult === RedeemResult.NO_CODE) {
+        alert("No Gift Code was provided!");
+      }
+    }
   }
 
   return (
