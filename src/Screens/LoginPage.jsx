@@ -75,9 +75,6 @@ const LoginPage = () => {
     const userUid = loginResult.uid;
 
     const redeemResult = await redeemCode(userUid, code);
-    alert(redeemResult);
-
-    return;
 
     if (redeemResult !== RedeemResult.SUCCESS) {
       if (redeemResult === RedeemResult.NO_UID) {
@@ -85,6 +82,8 @@ const LoginPage = () => {
         alert("There's been an unknown error while redeeming the gift code.");
       } else if (redeemResult === RedeemResult.NO_CODE) {
         alert("No Gift Code was provided!");
+      } else {
+        alert(`FUCK!!!!!!! (${redeemResult})`);
       }
     }
   }

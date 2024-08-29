@@ -1,6 +1,7 @@
 const loginEndpoint =
     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCuPBS62otAtKUJelEV8dVtXi_afDBFsYk";
-const redeemEndpoint = "https://us-central1-fom-amaru.cloudfunctions.net/api/redeemGiftCode";
+const redeemEndpoint =
+    "https://us-central1-fom-amaru.cloudfunctions.net/api/redeemGiftCode";
 
 export const LoginResult = Object.freeze({
     SUCCESS: 0,
@@ -64,7 +65,6 @@ export const redeemCode = async (uid, code) => {
 
     const redeemResponse = await fetch(redeemEndpoint, {
         method: "POST",
-        mode: 'no-cors',
         body: JSON.stringify({
             uid: uid,
             giftCode: code,
@@ -74,7 +74,9 @@ export const redeemCode = async (uid, code) => {
         },
     });
 
-    alert(JSON.stringify(redeemResponse, null, 2));
+    const redeemJson = redeemResponse.json();
+
+    alert(JSON.stringify(redeemJson, null, 2));
 
     return RedeemResult.UNKNOWN_ERROR;
 };
