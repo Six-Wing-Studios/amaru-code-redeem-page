@@ -3,7 +3,7 @@ const loginEndpoint =
 const redeemEndpoint =
     "https://us-central1-fom-amaru.cloudfunctions.net/api/redeemGiftCode";
 
-export const LoginResult = Object.freeze({
+export const LoginResult = Object.freeze({ 
     SUCCESS: 0,
     BAD_EMAIL: 1,
     BAD_PASSWORD: 2,
