@@ -74,7 +74,7 @@ export const redeemCode = async (uid, code) => {
         },
     });
 
-    const redeemJson = redeemResponse.json();
+    const redeemJson = await redeemResponse.json();
 
     alert(JSON.stringify(redeemJson, null, 2));
 

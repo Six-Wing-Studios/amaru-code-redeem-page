@@ -83,7 +83,7 @@ const LoginPage = () => {
       } else if (redeemResult === RedeemResult.NO_CODE) {
         alert("No Gift Code was provided!");
       } else {
-        alert(`FUCK!!!!!!! (${redeemResult})`);
+        alert(`${redeemResult}`);
       }
     }
   }
