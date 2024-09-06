@@ -18,6 +18,12 @@ const LoginPage = () => {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
 
+  const invalidFieldStyle = { borderColor: 'red' };
+
+  const [ invalidEmailStyle, setInvalidEmailStyle ] = useState({});
+  const [ invalidPwStyle, setInvalidPasswordStyle ] = useState({});
+  const [ invalidGiftCodeStyle, setInvalidGiftCodeStyle ] = useState({});
+
   const handleToggle = () => {
     if (type==='password'){
        setIcon(eye);
@@ -56,14 +62,22 @@ const LoginPage = () => {
   const handleSubmitBtn = async () => {
     const loginResult = await login(email, password);
 
+    setInvalidEmailStyle({});
+    setInvalidPasswordStyle({});
+    setInvalidGiftCodeStyle({});
+
     if (!loginResult.uid) {
       if (loginResult.resultCode === LoginResult.NO_EMAIL) {
+        setInvalidEmailStyle(invalidFieldStyle);
         alert("No Email");
       } else if (loginResult.resultCode === LoginResult.NO_PASSWORD) {
+        setInvalidPasswordStyle(invalidFieldStyle);
         alert("No Password");
       } else if (loginResult.resultCode === LoginResult.BAD_EMAIL) {
+        setInvalidEmailStyle(invalidFieldStyle);
         alert("Invalid Email");
       } else if (loginResult.resultCode === LoginResult.BAD_PASSWORD) {
+        setInvalidPasswordStyle(invalidFieldStyle);
         alert("Invalid Password");
       } else {
         alert("An unknown error occurred while logging in.");
@@ -80,12 +94,16 @@ const LoginPage = () => {
       if (redeemResult === RedeemResult.NO_UID) {
         alert("There's been an unknown error while redeeming the gift code.");
       } else if (redeemResult === RedeemResult.NO_CODE) {
+        setInvalidGiftCodeStyle(invalidFieldStyle);
         alert("No Gift Code was provided!");
       } else if (redeemResult === RedeemResult.CODE_ALREADY_USED) {
+        setInvalidGiftCodeStyle(invalidFieldStyle);
         alert("The provided gift code has already been redeemed.");
       } else if (redeemResult === RedeemResult.CODE_NOT_FOUND) {
+        setInvalidGiftCodeStyle(invalidFieldStyle);
         alert("The provided gift code is invalid");
       } else if (redeemResult === RedeemResult.USER_ALREADY_OWNS) {
+        setInvalidGiftCodeStyle(invalidFieldStyle);
         alert("You already own the content that this gift code unlocks!");
       } else if (redeemResult === RedeemResult.SUCCESS) {
         alert("Congratulations! The gift code was successfully redeemed!");
@@ -104,6 +122,7 @@ const LoginPage = () => {
       <div className="loginsection">
         <input 
           className='emailField'
+          style={invalidEmailStyle}
           type='email'
           placeholder='Email'
           value={email}
@@ -113,6 +132,7 @@ const LoginPage = () => {
         <span className='pwFieldContainer'>
           <input 
             className='pwField'
+            style={invalidPwStyle}
             type={type}
             placeholder='Password'
             value={password}
@@ -139,6 +159,7 @@ const LoginPage = () => {
       <div>
         <input 
           className='codeField'
+          style={invalidGiftCodeStyle}
           placeholder='ABCD-1234'
           value={codeFieldText}
           onChange={onCodeInputChanged}
