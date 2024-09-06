@@ -4,6 +4,8 @@ import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 
+import { toast } from 'react-toastify';
+
 import './LoginPage.css';
 import { login, LoginResult, redeemCode, RedeemResult } from '../AmaruFirebaseInterface';
 
@@ -69,18 +71,18 @@ const LoginPage = () => {
     if (!loginResult.uid) {
       if (loginResult.resultCode === LoginResult.NO_EMAIL) {
         setInvalidEmailStyle(invalidFieldStyle);
-        alert("No Email");
+        toast.error("No Email address was entered!");
       } else if (loginResult.resultCode === LoginResult.NO_PASSWORD) {
         setInvalidPasswordStyle(invalidFieldStyle);
-        alert("No Password");
+        toast.error("No Password was entered!");
       } else if (loginResult.resultCode === LoginResult.BAD_EMAIL) {
         setInvalidEmailStyle(invalidFieldStyle);
-        alert("Invalid Email");
+        toast.error("An invalid Email was entered");
       } else if (loginResult.resultCode === LoginResult.BAD_PASSWORD) {
         setInvalidPasswordStyle(invalidFieldStyle);
-        alert("Invalid Password");
+        toast.error("An invalid Password was entered");
       } else {
-        alert("An unknown error occurred while logging in.");
+        toast.error("An unknown error occurred while logging in.");
       }
 
       return;
@@ -92,25 +94,32 @@ const LoginPage = () => {
 
     if (redeemResult !== RedeemResult.SUCCESS) {
       if (redeemResult === RedeemResult.NO_UID) {
-        alert("There's been an unknown error while redeeming the gift code.");
+        toast.error("There's been an unknown error while redeeming the gift code.");
       } else if (redeemResult === RedeemResult.NO_CODE) {
         setInvalidGiftCodeStyle(invalidFieldStyle);
-        alert("No Gift Code was provided!");
+        toast.error("No Gift Code was provided!");
       } else if (redeemResult === RedeemResult.CODE_ALREADY_USED) {
         setInvalidGiftCodeStyle(invalidFieldStyle);
-        alert("The provided gift code has already been redeemed.");
+        toast.error("The provided gift code has already been redeemed.");
       } else if (redeemResult === RedeemResult.CODE_NOT_FOUND) {
         setInvalidGiftCodeStyle(invalidFieldStyle);
-        alert("The provided gift code is invalid");
+        toast.error("The provided gift code is invalid");
       } else if (redeemResult === RedeemResult.USER_ALREADY_OWNS) {
         setInvalidGiftCodeStyle(invalidFieldStyle);
-        alert("You already own the content that this gift code unlocks!");
+        toast.error("You already own the content that this gift code unlocks!");
       } else if (redeemResult === RedeemResult.SUCCESS) {
-        alert("Congratulations! The gift code was successfully redeemed!");
+        toast.success("Congratulations! The gift code was successfully redeemed!", {
+          autoClose: false,
+        });
+        doSuccessFormat();
       } else {
-        alert(`An unknown error has occurred while redeeming the provided gift code.`);
+        toast.error(`An unknown error has occurred while redeeming the provided gift code.`);
       }
     }
+  }
+
+  const doSuccessFormat = () => {
+    //disable the submit button, maybe recolor it and show "success!" or something
   }
 
   return (
