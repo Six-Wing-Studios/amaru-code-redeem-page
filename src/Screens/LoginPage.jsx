@@ -119,6 +119,10 @@ const LoginPage = () => {
         {/* <div className='forgotPw' onClick={forgotPwLink} >
           Forgot Password?
         </div> */}
+
+        <div className='createAcctC2A'>
+          Use the credentials you use to log into the Amaru app. If you do not have an account yet, download Amaru and create one.
+        </div>
       </div>
 
       <div className='codeC2aText'>
