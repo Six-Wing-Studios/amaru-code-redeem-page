@@ -20,6 +20,7 @@ export const RedeemResult = Object.freeze({
     USER_ALREADY_OWNS: 4,
     NO_CODE: 5,
     NO_UID: 6,
+    CODE_NOT_FOUND: 7,
     UNKNOWN_ERROR: 99,
 });
 
@@ -75,6 +76,28 @@ export const redeemCode = async (uid, code) => {
     });
 
     const redeemJson = await redeemResponse.json();
+
+    /*
+        possible result 'msg' values: giftCodeNotFound giftAlreadyClaimed unknownError userAlreadyOwnsThis success
+    */
+
+    const resultCode = redeemJson.msg;
+
+    if (resultCode === 'success') {
+        return RedeemResult.SUCCESS;
+
+    } else if (resultCode === 'giftCodeNotFound') {
+        return RedeemResult.CODE_NOT_FOUND;
+        
+    } else if (resultCode === 'giftAlreadyClaimed') {
+        return RedeemResult.CODE_ALREADY_USED;
+    
+    } else if (resultCode === 'userAlreadyOwnsThis') {
+        return RedeemResult.USER_ALREADY_OWNS;
+    
+    } else {
+        return RedeemResult.UNKNOWN_ERROR;
+    }
 
     alert(JSON.stringify(redeemJson, null, 2));
 

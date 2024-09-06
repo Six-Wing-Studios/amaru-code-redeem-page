@@ -78,12 +78,19 @@ const LoginPage = () => {
 
     if (redeemResult !== RedeemResult.SUCCESS) {
       if (redeemResult === RedeemResult.NO_UID) {
-        //summat queer
         alert("There's been an unknown error while redeeming the gift code.");
       } else if (redeemResult === RedeemResult.NO_CODE) {
         alert("No Gift Code was provided!");
+      } else if (redeemResult === RedeemResult.CODE_ALREADY_USED) {
+        alert("The provided gift code has already been redeemed.");
+      } else if (redeemResult === RedeemResult.CODE_NOT_FOUND) {
+        alert("The provided gift code is invalid");
+      } else if (redeemResult === RedeemResult.USER_ALREADY_OWNS) {
+        alert("You already own the content that this gift code unlocks!");
+      } else if (redeemResult === RedeemResult.SUCCESS) {
+        alert("Congratulations! The gift code was successfully redeemed!");
       } else {
-        alert(`${redeemResult}`);
+        alert(`An unknown error has occurred while redeeming the provided gift code.`);
       }
     }
   }
