@@ -90,3 +90,8 @@
 .infoReminder {
     color: #525252;
 }
+
+.successContainer {
+    color: green;
+    font-size: 24px;
+}

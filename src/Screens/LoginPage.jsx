@@ -1,8 +1,10 @@
 import { React, useState } from 'react';
 
 import { Icon } from 'react-icons-kit';
+
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
+import { checkCircle } from 'react-icons-kit/fa/checkCircle'
 
 import { toast } from 'react-toastify';
 
@@ -25,6 +27,8 @@ const LoginPage = () => {
   const [ invalidEmailStyle, setInvalidEmailStyle ] = useState({});
   const [ invalidPwStyle, setInvalidPasswordStyle ] = useState({});
   const [ invalidGiftCodeStyle, setInvalidGiftCodeStyle ] = useState({});
+
+  const [ redeemSucceeded, setRedeemSucceeded ] = useState(false);
 
   const handleToggle = () => {
     if (type==='password'){
@@ -122,6 +126,7 @@ const LoginPage = () => {
 
   const doSuccessFormat = () => {
     //disable the submit button, maybe recolor it and show "success!" or something
+    setRedeemSucceeded(true);
   }
 
   return (
@@ -178,7 +183,12 @@ const LoginPage = () => {
       </div>
       
       <div>
-        <button className='submitBtn' onClick={handleSubmitBtn}>Submit</button>
+        {!redeemSucceeded ?
+          <button className='submitBtn' onClick={handleSubmitBtn}>Submit</button> :
+          <div className='successContainer'>
+            <Icon icon={checkCircle} size={40}/>
+            Success!
+          </div>}
       </div>
 
       <div className='infoReminder'>Having trouble? Please message info@sixwingstudios.com</div>
