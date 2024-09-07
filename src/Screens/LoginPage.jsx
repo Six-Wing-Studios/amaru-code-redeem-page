@@ -107,14 +107,16 @@ const LoginPage = () => {
       } else if (redeemResult === RedeemResult.USER_ALREADY_OWNS) {
         setInvalidGiftCodeStyle(invalidFieldStyle);
         toast.error("You already own the content that this gift code unlocks!");
-      } else if (redeemResult === RedeemResult.SUCCESS) {
-        toast.success("Congratulations! The gift code was successfully redeemed!", {
-          autoClose: false,
-        });
-        doSuccessFormat();
       } else {
         toast.error(`An unknown error has occurred while redeeming the provided gift code.`);
       }
+    }
+    else {
+      toast.success("Congratulations! The gift code was successfully redeemed!", {
+        autoClose: false,
+      });
+      //alert("success");
+      doSuccessFormat();
     }
   }
 
